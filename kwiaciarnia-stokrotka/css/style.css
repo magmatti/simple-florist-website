@@ -1,0 +1,133 @@
+.flexbox {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.flexbox2 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.flexbox3 {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.flexbox-vertical {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    /* height: 500px; */
+}
+
+.btn-primary {
+    border-color: #000;
+}
+
+.btn-primary:hover {
+    border-color: #000;
+}
+
+.slider-background {
+    background-color: #212529;
+}
+
+.logo-img {
+    width: 30px;
+    height: 30px;
+    margin-right: 10px;
+}
+
+.footer {
+    padding-top: 30px;
+    padding-bottom: 30px;
+    text-align: center;
+}
+
+.socials-icon {
+    width: 25px;
+    height: 25px;
+    margin-right: 10px;
+}
+
+.services-header {
+    margin-bottom: 50px;
+}
+
+.our-services {
+    margin: 0 auto;
+    margin-top: 50px;
+}
+
+.why-us {
+    margin-top: 50px;
+}
+
+.why-us-box {
+    width: 320px;
+    height: 80px;
+    background-color: #198754;
+    color: #fff;
+    margin-bottom: 50px;
+    font-size: 18px;
+}
+
+/* Pomoc/kontakt */
+
+.help-div2 {
+    background-color: darkslategray;
+}
+
+.help-img {
+    max-width: 100%;
+}
+
+.help-img img {
+    max-width: 100%;
+}
+
+.help-text {
+    color: #fff;
+    margin: 0 auto;
+} 
+
+.help-button {
+    background-color: #198754;
+    width: 100px;
+    height: 50px;
+    margin-bottom: 20px;
+    margin-right: 20px;
+}
+
+.help-button-link {
+    text-decoration: none;
+    color: #fff;
+}
+
+.help-button-link:hover {
+    text-decoration: none;
+    color: #fff;
+}
+
+.php-wrapper {
+    margin-bottom: 50px;
+}
+
+.h1-style {
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+.contact-wrapper {
+    margin-top: 50px;
+    margin-bottom: 50px;
+    max-width: 100%;
+}
+
+.contact-icon {
+    height: 50px;
+    width: 50px;
+}
