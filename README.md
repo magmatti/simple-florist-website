@@ -1,2 +1,2 @@
 # simple-florist-website
-Simple project made for university purposes
+Simple project made for university purposes.
