@@ -60,33 +60,22 @@
             <input style="width:200px; height: 50px; background-color: #198754; border: none; border-radius: 0px; color: #fff; margin-top: 50px; margin-bottom: 50px;" type="submit" name="submit" value="Usuń">
         </form>
         <?php 
-             error_reporting(0);
+            //  error_reporting(0);
 
              if(isset($_POST["number"])) {
-                 $servername = "localhost";
-                 $username = "mateusz.wojtowicz4";
-                 $password = "myBKIVFsql";
-                 $dbname = "mateusz.wojtowicz4";
+                require __DIR__.'/php/db_connection.php';
 
-                 $ID = $_POST["number"];
+                $ID = $_POST["number"];
+                $sql = "DELETE FROM comments WHERE id = $ID;";
 
-                 // Create connection
-                 $conn = mysqli_connect($servername, $username, $password, $dbname);
-                 // Check connection
-                 if (!$conn) {
-                     die("Connection failed: " . mysqli_connect_error());
-                 }
-
-                 $sql = "DELETE FROM komentarze2 WHERE id = $ID;";
-
-                 if (mysqli_query($conn, $sql)) {
-                     echo "Usunieto komentarz!\n";
-                     // echo "<br>" . "Edytowano: " . date(DATE_RFC2822);
-                 } else {
-                     echo "Error: " . $sql . "<br>" . mysqli_error($conn);
-                 }
-                
-                 mysqli_close($conn);
+                if (mysqli_query($conn, $sql)) {
+                    echo "Usunieto komentarz!\n";
+                    // echo "<br>" . "Edytowano: " . date(DATE_RFC2822);
+                } else {
+                    echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+                }
+            
+                mysqli_close($conn);
             }
         ?>
     </div>
@@ -94,19 +83,9 @@
     <div class="flexbox2">
         <!-- Wyswietlanie tabeli z komentarzami -->
         <?php 
-            $servername = "localhost";
-            $username = "mateusz.wojtowicz4";
-            $password = "myBKIVFsql";
-            $dbname = "mateusz.wojtowicz4";
+            require __DIR__.'/php/db_connection.php';
         
-            // Create connection
-            $conn = mysqli_connect($servername, $username, $password, $dbname);
-            // Check connection
-            if (!$conn) {
-            die("Connection failed: " . mysqli_connect_error());
-            }
-        
-            $sql = "SELECT id, imie, nazwisko, ocena, komentarz, data FROM komentarze2";
+            $sql = "SELECT id, imie, nazwisko, ocena, komentarz, data FROM comments";
             $result = mysqli_query($conn, $sql);
             
             echo '<table class="table">';

@@ -1,17 +1,7 @@
 <?php
-  $servername = "localhost";
-  $username = "mateusz.wojtowicz4";
-  $password = "myBKIVFsql";
-  $dbname = "mateusz.wojtowicz4";
+  require 'db_connection.php';
 
-  // Create connection
-  $conn = mysqli_connect($servername, $username, $password, $dbname);
-  // Check connection
-  if (!$conn) {
-    die("Connection failed: " . mysqli_connect_error());
-  }
-
-  $sql = "SELECT id, nazwa, ilosc, cena FROM Produkty";
+  $sql = "SELECT id, nazwa, ilosc, cena FROM products";
   $result = mysqli_query($conn, $sql);
 
   echo '<div class="container">';

@@ -55,20 +55,34 @@
     <!-- Wyswietl opinie -->
     <div class="opinie flexbox">
         <div class="php-wrapper">
-            <?php 
-                $servername = "localhost";
-                $username = "mateusz.wojtowicz4";
-                $password = "myBKIVFsql";
-                $dbname = "mateusz.wojtowicz4";
-              
-                // Create connection
-                $conn = mysqli_connect($servername, $username, $password, $dbname);
-                // Check connection
-                if (!$conn) {
-                  die("Connection failed: " . mysqli_connect_error());
+            <?php
+                require __DIR__.'/php/db_connection.php';
+
+                // error_reporting(0);
+
+                if(isset($_POST["imie"]) && isset($_POST["nazwisko"]) && isset($_POST["message"]) && isset($_POST["ocena"])) {
+                    $imie = $_POST["imie"];
+                    $nazwisko = $_POST["nazwisko"];
+                    $message = $_POST["message"];
+                    $ocena = $_POST["ocena"];
+                    $data = date("Y-m-d H:i:s");
+    
+                    $sql_insert = "INSERT INTO comments (imie, nazwisko, komentarz, ocena, data)
+                            VALUES ('$imie', '$nazwisko', '$message', $ocena, '$data');";
+    
+                    if (mysqli_query($conn, $sql_insert)) {
+                        echo "Dziękujemy za opinie!\n";
+                    } else {
+                        echo "Error: " . $sql_insert . "<br>" . mysqli_error($conn);
+                    }
                 }
+
+                mysqli_close($conn);
+            ?>
+            <?php 
+                require __DIR__.'/php/db_connection.php';
               
-                $sql = "SELECT id, imie, nazwisko, ocena, komentarz, data FROM komentarze2";
+                $sql = "SELECT id, imie, nazwisko, ocena, komentarz, data FROM comments";
                 $result = mysqli_query($conn, $sql);
                 
                 echo '<table class="table">';
@@ -77,79 +91,44 @@
                   // output data of each row
                   while($row = mysqli_fetch_assoc($result)) {
                     echo "<tr>";
-                    echo  "<td>" . $row["imie"] . "</td>" . "<td>" . " " . $row["ocena"] . "/5" . "</td>" . "<td>" . " " . $row["komentarz"] .  "</td>" . "<td>" . "        Dodano: " . $row["data"] . "</td>" ;
+                    echo  "<td>" . $row["imie"] . "</td>" . "<td>" . $row["nazwisko"] . "</td>" . "<td>" . " " . $row["ocena"] . "/5" . "</td>" . "<td>" . " " . $row["komentarz"] .  "</td>" . "<td>" . "        Dodano: " . $row["data"] . "</td>" ;
                     echo "</tr>";
                   }
                 } else {
                   echo "0 results";
                 }
-              
+                
                 echo "</table>";
               
                 mysqli_close($conn);
             ?>
         </div>
-        <div class="php-form ">
+        <div class="php-form">
             <h2 class="flexbox2" style="margin-bottom: 50px;">Dodaj komentarz</h2>
             <form method="post">
             <div class="" style="margin-bottom: 50px;">
-            <form action="php/insert_opinia.php" method="post">
-                <div class="flexbox" style=>
-                    <div>
-                        <input type="text" name="imie" placeholder="Imie" required><br><br>
-                        <input type="text" name="nazwisko" placeholder="Nazwisko" required><br><br>
-                        <textarea placeholder="Komentarz" rows="5" name="message" cols="30" required></textarea><br><br>
-                        <input placeholder="Ocena" list="oceny" id="ocena" name="ocena" required><br><br>
-                        <datalist id="oceny">
-                            <option value=1>
-                            <option value=2>
-                            <option value=3>
-                            <option value=4>
-                            <option value=5>
-                        </datalist>
+                <form action="php/insert_opinia.php" method="post">
+                    <div class="flexbox">
+                        <div>
+                            <input type="text" name="imie" placeholder="Imie" required><br><br>
+                            <input type="text" name="nazwisko" placeholder="Nazwisko" required><br><br>
+                            <textarea placeholder="Komentarz" rows="5" name="message" cols="30" required></textarea><br><br>
+                            <input placeholder="Ocena" list="oceny" id="ocena" name="ocena" required><br><br>
+                            <datalist id="oceny">
+                                <option value=1>
+                                <option value=2>
+                                <option value=3>
+                                <option value=4>
+                                <option value=5>
+                            </datalist>
+                        </div>
                     </div>
-                </div>
-                <div class="flexbox2">
-                    <input style="width:200px; height: 50px; background-color: #198754; border: none; border-radius: 0px; color: #fff; margin-top: 50px;" type="submit" name="submit" value="Dodaj">
-                </div>
-            </form>
-            <?php
-                error_reporting(0);
-
-                if(isset($_POST["imie"]) && isset($_POST["nazwisko"]) && isset($_POST["message"]) && isset($_POST["ocena"])) {
-                    $servername = "localhost";
-                    $username = "mateusz.wojtowicz4";
-                    $password = "myBKIVFsql";
-                    $dbname = "mateusz.wojtowicz4";
-    
-                    $imie = $_POST["imie"];
-                    $nazwisko = $_POST["nazwisko"];
-                    $message = $_POST["message"];
-                    $ocena = $_POST["ocena"];
-                    $data = date("Y-m-d H:i:s");
-    
-                    // Create connection
-                    $conn = mysqli_connect($servername, $username, $password, $dbname);
-                    // Check connection
-                    if (!$conn) {
-                        die("Connection failed: " . mysqli_connect_error());
-                    }
-    
-                    $sql = "INSERT INTO komentarze2 (imie, nazwisko, komentarz, ocena, data)
-                            VALUES ('$imie', '$nazwisko', '$message', $ocena, '$data');";
-    
-                    if (mysqli_query($conn, $sql)) {
-                        echo "Dziękujemy za opinie!\n";
-                        // echo "<br>" . "Edytowano: " . date(DATE_RFC2822);
-                    } else {
-                        echo "Error: " . $sql . "<br>" . mysqli_error($conn);
-                    }
-    
-                    mysqli_close($conn);
-                } 
-            ?>
+                    <div class="flexbox2">
+                        <input style="width:200px; height: 50px; background-color: #198754; border: none; border-radius: 0px; color: #fff; margin-top: 50px;" type="submit" name="submit" value="Dodaj">
+                    </div>
+                </form>
+            </div>
         </div>
-    </div>
     </div>
     
     <!-- Footer -->

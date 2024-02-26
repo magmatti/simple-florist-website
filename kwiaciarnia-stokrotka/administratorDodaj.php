@@ -72,23 +72,13 @@
                 error_reporting(0);
 
                 if(isset($_POST["nazwa"]) && isset($_POST["ilosc"]) && isset($_POST["cena"])) {
-                    $servername = "localhost";
-                    $username = "mateusz.wojtowicz4";
-                    $password = "myBKIVFsql";
-                    $dbname = "mateusz.wojtowicz4";
+                    require __DIR__.'/php/db_connection.php';
 
                     $nazwa = $_POST["nazwa"];
                     $ilosc = $_POST["ilosc"];
                     $cena = $_POST["cena"];
 
-                    // Create connection
-                    $conn = mysqli_connect($servername, $username, $password, $dbname);
-                    // Check connection
-                    if (!$conn) {
-                        die("Connection failed: " . mysqli_connect_error());
-                    }
-
-                    $sql = "INSERT INTO Produkty (nazwa, ilosc, cena)
+                    $sql = "INSERT INTO products (nazwa, ilosc, cena)
                             VALUES ('$nazwa', $ilosc, $cena);";
 
                     if (mysqli_query($conn, $sql)) {
