@@ -2,7 +2,7 @@
     $servername = "localhost";
     $username = "root";
     $password = "";
-    $dbname = "florist_shop_db";
+    $dbname = "your_db_name";
 
     $conn = mysqli_connect($servername, $username, $password, $dbname);
 
