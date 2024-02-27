@@ -4,10 +4,9 @@
     $password = "";
     $dbname = "florist_shop_db";
 
-    // Create connection
     $conn = mysqli_connect($servername, $username, $password, $dbname);
 
-    // Check connection
+    // Checking connection for failures
     if (!$conn) {
         die("Connection failed: " . mysqli_connect_error());
     }
