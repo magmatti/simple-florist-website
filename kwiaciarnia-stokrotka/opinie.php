@@ -98,12 +98,11 @@
         </div>
         <div class="php-form">
             <h2 class="flexbox2" style="margin-bottom: 50px;">Dodaj komentarz</h2>
-            <form method="post">
-            <div class="" style="margin-bottom: 50px;">
+            <div style="margin-bottom: 50px;">
                 <form action="php/insert_opinia.php" method="post">
                     <div class="flexbox">
                         <div>
-                            <input type="text" name="imie" placeholder="Imie" required><br><br>
+                            <input type="text" name="imie" placeholder="Imie" required class="input-text"><br><br>
                             <input type="text" name="nazwisko" placeholder="Nazwisko" required><br><br>
                             <textarea placeholder="Komentarz" rows="5" name="message" cols="30" required></textarea><br><br>
                             <input placeholder="Ocena" list="oceny" id="ocena" name="ocena" required><br><br>
