@@ -57,9 +57,7 @@
         <div class="php-wrapper">
             <?php
                 require __DIR__.'/php/db_connection.php';
-
-                // error_reporting(0);
-
+                
                 if(isset($_POST["imie"]) && isset($_POST["nazwisko"]) && isset($_POST["message"]) && isset($_POST["ocena"])) {
                     $imie = $_POST["imie"];
                     $nazwisko = $_POST["nazwisko"];
@@ -77,11 +75,6 @@
                     }
                 }
 
-                mysqli_close($conn);
-            ?>
-            <?php 
-                require __DIR__.'/php/db_connection.php';
-              
                 $sql = "SELECT id, imie, nazwisko, ocena, komentarz, data FROM comments";
                 $result = mysqli_query($conn, $sql);
                 
@@ -99,7 +92,7 @@
                 }
                 
                 echo "</table>";
-              
+
                 mysqli_close($conn);
             ?>
         </div>
